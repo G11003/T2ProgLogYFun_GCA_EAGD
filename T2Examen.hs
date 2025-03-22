@@ -1,4 +1,5 @@
 type Nodo = Int
+
 type Grafo = [(Nodo, [Nodo])]
 
 -- Definición del grafo no dirigido
@@ -11,6 +12,25 @@ grafoNoDirigido = [
     (5, [2, 3, 4])  -- 5 está conectado con 2, 3 y 4
     ]
 
--- Función para imprimir el grafo
+-- Función para obtener los vecinos de un nodo en el grafo
+vecinos :: Grafo -> Nodo -> [Nodo]
+vecinos [] _ = []
+vecinos ((n, ady):xs) nodo
+    | n == nodo = ady
+    | otherwise = vecinos xs nodo
+
+-- Implementación de BFS
+bfs :: Grafo -> Nodo -> [Nodo]
+bfs grafo start = bfsAux [start] []
+  where
+    bfsAux [] visitados = visitados
+    bfsAux (x:xs) visitados
+        | x `elem` visitados = bfsAux xs visitados
+        | otherwise = bfsAux (xs ++ vecinos grafo x) (visitados ++ [x])
+
+-- Función para imprimir el grafo y el recorrido BFS
 main :: IO ()
-main = mapM_ print grafoNoDirigido
+main = do
+    mapM_ print grafoNoDirigido
+    putStrLn "Recorrido BFS desde el nodo 1:"
+    print (bfs grafoNoDirigido 1)
