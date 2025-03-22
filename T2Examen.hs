@@ -1,4 +1,4 @@
-type Nodo = Int 
+type Nodo = Int  
  
 type Grafo = [(Nodo, [Nodo])] 
  -- Definición del grafo no dirigido 
