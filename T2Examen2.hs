@@ -1,4 +1,4 @@
--- Definimos una lista con 10 elementos
+-- Definimos una lista con 10 elementos 
 lista :: [Int]
 lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
